@@ -57,7 +57,7 @@ Formato clássico de ADR (*Architecture Decision Record*): contexto, decisão, a
 ## github/ (gerado)
 
 - `issues/<org>__<repo>__<n>.md`: issue com frontmatter e comentários.
-- `prs/<org>__<repo>__<n>.md`: PR com descrição, branch, issues que fecha e arquivos alterados.
+- `prs/<org>__<repo>__<n>.md`: PR com descrição, branch, issues vinculadas e arquivos alterados.
 - `SUMMARY.md`: tabela com tudo dos últimos N dias.
 
 **Nunca edite à mão:** o próximo sync sobrescreve.

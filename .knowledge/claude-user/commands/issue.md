@@ -19,6 +19,7 @@ Trabalhe na issue #$ARGUMENTS seguindo as fases abaixo.
 
 ## Fase 4 — PR
 - Pergunte se pode abrir o PR. Ao confirmar, abra com `gh pr create`: título claro, descrição em
-  português (o quê, por quê, como testar, regras RN-* envolvidas) e `Closes #<numero>`.
+  português (o quê, por quê, como testar, regras RN-* envolvidas) e `Refs #<numero>` (apenas referencia a issue).
+- NUNCA use `Closes`, `Fixes` ou `Resolves` (nem variações): a issue não deve ser fechada automaticamente.
 - Nunca mencione `.knowledge` nem `CLAUDE.md` no PR ou nos commits.
 - A revisão e o registro pós-PR são disparados automaticamente por hook.

@@ -27,7 +27,7 @@ Ele responde com:
 Cria a branch, implementa, roda lint e testes.
 
 ### Fase 4 — PR (você aprova)
-Pergunta se pode abrir. Abre com descrição em português e `Closes #482`.
+Pergunta se pode abrir. Abre com descrição em português e `Refs #482`, que liga o PR à issue sem fechá-la. O fechamento da issue fica com você ou com o seu time.
 
 ### Fase 5 — Revisão + registro (automático, via hook)
 Revisa o diff contra as regras e depois propõe as atualizações na base. Você aprova o que vai ser gravado.

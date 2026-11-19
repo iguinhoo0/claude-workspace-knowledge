@@ -92,7 +92,7 @@ branch: \(.headRefName) -> \(.baseRefName)
 criado: \(.createdAt)
 atualizado: \(.updatedAt)
 merged: \(.mergedAt // "")
-fecha_issues: \([.closingIssuesReferences[]?.number]|@json)
+issues_vinculadas: \([.closingIssuesReferences[]?.number]|@json)
 url: \(.url)
 ---
 

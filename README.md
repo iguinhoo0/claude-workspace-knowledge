@@ -110,7 +110,7 @@ E daí em diante:
 1. 🔍 **Contexto:** o Claude baixa a issue, lê o resumo do projeto, encontra as regras de negócio que se aplicam e confere se o código bate com elas.
 2. 📝 **Plano:** ele mostra um resumo, as regras envolvidas, os arquivos que vai mexer, as **dúvidas** e as **divergências** que encontrou. Depois **para e espera você aprovar**.
 3. 🛠️ **Implementação:** cria a branch, implementa, roda lint e testes.
-4. 🚀 **PR:** pergunta se pode abrir o PR e abre com `Closes #482`.
+4. 🚀 **PR:** pergunta se pode abrir o PR e abre com `Refs #482` (liga o PR à issue, sem fechá-la).
 5. 🔎 **Revisão automática:** assim que o PR é aberto, ele revisa o diff contra as regras documentadas.
 6. 📚 **Registro automático:** em seguida, atualiza a base (features, regras, decisões) e mostra o que vai gravar.
 
