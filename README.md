@@ -10,6 +10,54 @@ E o melhor: **tudo fica só na sua máquina.** Nada disso vai parar nos reposit�
 
 ---
 
+## ✨ Por que vale a pena
+
+### 💰 Menos tokens gastos (e menos limite estourado)
+
+Sem uma base de contexto, o Claude **descobre** o projeto a cada sessão: lista pastas, abre arquivo atrás de arquivo, faz `grep`, lê testes, consulta a API do GitHub... Tudo isso entra na janela de contexto e é cobrado em tokens, **toda vez**, porque ele não guarda nada de uma sessão para a outra.
+
+Com a base, ele vai direto ao ponto:
+
+| | Sem a base | Com a base |
+|---|---|---|
+| Entender o projeto | Explora dezenas de arquivos | Lê o `CONTEXT.md` (≈ 1 página) |
+| Achar a regra de negócio | Lê serviços, controllers e testes até inferir | Lê o `INDEX.md` e abre 1–3 arquivos `RN-*` |
+| Ler a issue/PR | Chamadas à API do GitHub, respostas em JSON grandes | Lê um Markdown local, já limpo |
+| Você explicando o projeto | Parágrafos de contexto em toda sessão | Zero: o `CLAUDE.md` já faz isso |
+| Retrabalho por regra errada | Implementa, você corrige, ele refaz | Ele pergunta **antes** de codar |
+
+> **Ordem de grandeza (ilustrativa, varia muito por projeto):** explorar um módulo para "entender como funciona" costuma consumir dezenas de milhares de tokens em leituras de arquivo. O `CONTEXT.md` + `INDEX.md` + algumas regras ficam tipicamente em poucos milhares. A maior economia, porém, não aparece na tabela: é o **retrabalho que deixa de acontecer**. Uma implementação refeita custa o dobro de tokens e de tempo.
+
+E tem um efeito que vai além do custo: **contexto mais limpo gera respostas melhores.** Quanto mais lixo na janela, mais o modelo se perde, e mais cedo a conversa precisa ser compactada ou reiniciada. Aqui ele recebe só o que importa.
+
+O investimento é pequeno: as instruções do `CLAUDE.md` e o resumo do projeto custam algumas centenas a poucos milhares de tokens por sessão. Mantenha o `INDEX.md` enxuto e esse custo continua baixo.
+
+### 🎯 O Claude para de adivinhar regra de negócio
+
+Código mostra *o que foi feito*; a base mostra *o que deveria ser feito*, incluindo as exceções. O Claude passa a implementar com a intenção do negócio em mãos, e não com um palpite que só parece certo.
+
+### 🔍 Divergências viram achados
+
+Quando código e documentação discordam, ele **para e pergunta**. Ou é um bug, ou é uma regra que mudou sem ninguém registrar. As duas descobertas valem ouro, principalmente em sistemas legados.
+
+### ⏱️ Você para de repetir contexto
+
+Toda sessão, em todo repo, começa sabendo o que é o projeto, a stack, os padrões e as armadilhas. Você digita `/issue 482` e ele já sabe por onde começar.
+
+### ✅ Revisão de PR com olhar de negócio
+
+Assim que o PR é aberto, uma revisão automática confere o diff contra as regras documentadas. Não só lint e estilo: ela verifica se alguma regra foi quebrada.
+
+### 📚 A base cresce sozinha
+
+Ao final de cada tarefa, o Claude propõe o que documentar e você só aprova. Daqui a 6 meses, "por que isso funciona assim?" tem resposta, com a issue e o PR linkados. Também é ótimo para onboarding.
+
+### 🔒 100% local
+
+Nada vai para o git dos projetos, nada depende de servidor, banco ou serviço externo. São arquivos Markdown na sua máquina.
+
+---
+
 ## Sumário
 
 - [O problema](#o-problema)
@@ -19,7 +67,6 @@ E o melhor: **tudo fica só na sua máquina.** Nada disso vai parar nos reposit�
 - [O dia a dia](#o-dia-a-dia)
 - [Os comandos](#os-comandos)
 - [O que acontece automaticamente](#o-que-acontece-automaticamente)
-- [Por que isso ajuda](#por-que-isso-ajuda)
 - [Por que nada vaza para o git](#por-que-nada-vaza-para-o-git)
 - [Perguntas frequentes](#perguntas-frequentes)
 - [Documentação completa](#documentação-completa)
@@ -136,15 +183,6 @@ Você nem precisa decorar: se escrever *"vamos resolver a #482"*, o Claude já s
 | Citou uma issue | Regra no `CLAUDE.md` | Segue o fluxo do `/issue` |
 | O Claude rodou `gh pr create` | Hook `PostToolUse` | Revisão do PR + registro na base |
 | Você disse "terminei" sem abrir PR | Regra no `CLAUDE.md` | Registro na base |
-
-## Por que isso ajuda
-
-- **O Claude para de adivinhar regra de negócio.** Ele passa a saber a *intenção* por trás do código, incluindo as exceções.
-- **Você para de repetir contexto.** Toda sessão, em todo repo, já começa sabendo o que é o projeto.
-- **Respostas melhores gastando menos contexto.** O `INDEX.md` faz o Claude abrir os 3 arquivos certos em vez de varrer 40.
-- **Divergências viram achados.** Quando o código e a regra documentada discordam, ou é um bug, ou é uma regra que mudou sem ninguém registrar. As duas coisas valem ouro.
-- **Revisão de PR com olhar de negócio.** Não só lint e estilo: a revisão confere se alguma regra foi quebrada.
-- **Memória técnica de verdade.** Daqui a 6 meses, "por que isso funciona assim?" tem resposta, com a issue e o PR linkados. Também é ótimo para onboarding.
 
 ## Por que nada vaza para o git
 
